@@ -1,9 +1,10 @@
-import { where, getDocs, getFirestore, collection, doc, query, onSnapshot } from "firebase/firestore";
+import { where, getDocs,updateDoc, getDoc, getFirestore, collection, doc, query, onSnapshot } from "firebase/firestore";
 import React, { useEffect, useState, useContext } from "react";
 import {ScrollView, Text, Button, View, Alert, ActivityIndicator, StyleSheet,TouchableOpacity, Image} from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { ListItem, Avatar, Icon} from "react-native-elements";
 import { TextInput } from "react-native-gesture-handler";
+import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType, RewardedInterstitialAd, RewardedAdEventType } from 'react-native-google-mobile-ads';
 import tw from "twrnc";
 import UserContext from "../context/UserContext";
 
@@ -18,10 +19,18 @@ const exerciseRef = collection(firestore,COLLECTION);
 //const weekNumber = 2;
 
 
+const adUnitId = __DEV__ ? TestIds.REWARDED_INTERSTITIAL : 'ca-app-pub-4929040887239501/1256636808';
+
+///// PUBLICIDAD ////
+const rewardedInterstitial = RewardedInterstitialAd.createForAdRequest(adUnitId, {
+  requestNonPersonalizedAdsOnly: true
+});
+
+
 const ExercisesListScreen = (props) => {
-  const {_week, buyExercise, exercisesHolding, coursesHolding} = useContext(UserContext);
+  const {_week, buyExercise, exercisesHolding, coursesHolding, priceExercise} = useContext(UserContext);
   const navigation = useNavigation();
-  
+  console.log('week: ',_week);
 
   
   const initialState = {
@@ -40,26 +49,70 @@ const ExercisesListScreen = (props) => {
   const [isEmpty, setEmpty] = useState(false);
   const [isFinalize, setFinalize] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [idStatement, setIdStatement] = useState("");
+  const [idSolution, setIdSolution] = useState("");
+  
+  const [rewardedInterstitialLoaded, setRewardedInterstitialLoaded] = useState(false);
   
 
   let payment = coursesHolding.find((element) => element.week == _week && element.codeCourse ==  props.codeCourse);
-  console.log('consulta a coursesHolding : ', payment);
+  
+  if(payment){
+    console.log('curso comprado por user : ', payment);
+  }
   /*
   const handleTextChange = (value, prop) => {
     setUser({ ...user, [prop]: value });
   };
 */
-  console.log('exercisesHolding context: ', exercisesHolding);
-  
+  //console.log('exercisesHolding context: ', exercisesHolding);
+
+  //// PUBLICIDAD
+  const loadRewardedInterstitial = () => {
+    const unsubscribeLoaded = rewardedInterstitial.addAdEventListener(
+      RewardedAdEventType.LOADED,
+      () => {
+        setRewardedInterstitialLoaded(true);
+      }
+    );
+
+    const unsubscribeEarned = rewardedInterstitial.addAdEventListener(
+      RewardedAdEventType.EARNED_REWARD,
+      reward => {
+        console.log(`User earned reward of ${reward.amount} ${reward.type}`);
+        /*navigation.navigate("SolutionScreen", {
+          refResolution: idSolution,
+          refStatement: idStatement
+        });*/
+      }
+    );
+
+    const unsubscribeClosed = rewardedInterstitial.addAdEventListener(
+      AdEventType.CLOSED,
+      () => {
+        setRewardedInterstitialLoaded(false);
+        rewardedInterstitial.load();
+      }
+    );
+
+    rewardedInterstitial.load();
+
+    return () => {
+      unsubscribeLoaded();
+      unsubscribeClosed();
+      unsubscribeEarned();
+    }
+  };
+
 
   const getExerciseById = (id) => {
-    console.log("consultando exercise");
+    console.log("consultando exercise con id: ", id);
     const q = query(exerciseRef, where("codeCourse", "==", id), where("week","==", _week));
     
     
     
     
-    onSnapshot(q, (querySnapshot) => {
+    onSnapshot(q, async(querySnapshot) =>{
       
       setLoading(true);
       const exercises = [];
@@ -69,22 +122,24 @@ const ExercisesListScreen = (props) => {
           
           let pay;
           
-          if(payment){
+          if(payment || props.buy){  /// si se compro anteriormente o es recién comprado
             pay = true;
+            //console.log("pay true");
           }else{
             pay = exercisesHolding.includes(doc.id);
-            console.log('no se activa pay:....');
+            //console.log('no se activa pay:....');
           }
           
           
           
           
-          console.log('pay desde repository list: ',pay);
+          //console.log('pay desde repository list: ',pay);
 
           exercises.push({
             id: doc.id,
             pay: pay,        /////// indicador de compra de ejercicio      
-            price: 19 + Math.floor(Math.random()*(23-17)),
+            price: priceExercise? priceExercise+ Math.floor(Math.random()*(5)): 0,
+            //price: priceExercise,
             codeCourse,
             course,
             text,
@@ -99,10 +154,15 @@ const ExercisesListScreen = (props) => {
           
       });
       setEmpty(querySnapshot.empty);
-      setExercises(exercises);
+      setExercises(exercises.sort((a, b) => (a['sequence'] > b['sequence'] ? 1 : a['sequence'] < b['sequence'] ? -1 : 0)));
       setFinalize(true);
+
       
-      //console.log("Current exercises: ", exercises.join(", "));
+      
+
+
+
+      //console.log("Current exercises: ", exercises);
 
     });
     
@@ -121,14 +181,24 @@ const ExercisesListScreen = (props) => {
     getExerciseById(props.codeCourse);  /// obtiene el id por parametro de navigation
     console.log("dato recibido en repositorilist: ",props.codeCourse);
     
-    
+
   }, [_week, exercisesHolding]);
+
+  useEffect( () => {
+    const unsubscribeRewardedInterstitialEvents = loadRewardedInterstitial();
+    return () => {
+      unsubscribeRewardedInterstitialEvents();
+    };
+  },[]); 
 
 
   
   return (
     <ScrollView>
-        {isEmpty  && <Text>No se encontro ejercicios</Text>}
+      <View style = {tw`justify-center items-center` }>
+        {isEmpty  && <Text style = {tw`text-base font-black`}>No se encontro ejercicios</Text>}
+      </View>
+        
       {!isFinalize && <View >
                     <ActivityIndicator size="large" color="#9E9E9E" />
                   </View>}
@@ -138,12 +208,23 @@ const ExercisesListScreen = (props) => {
           <ListItem 
             key={exercise.sequence}
             bottomDivider
-            disabled = {!exercise.pay}
-            onPress={() => { if(exercise.pay){
+            //disabled = {!exercise.pay}        //// descontinuadoooooo por publicidad
+            onPress={() => { 
+              /*navigation.navigate("SolutionScreen", {
+                refResolution:exercise.resolution,
+                refStatement:exercise.id
+              });*/
+
+              
+              if(rewardedInterstitialLoaded){
+                rewardedInterstitial.show(); 
+              }
               navigation.navigate("SolutionScreen", {
-                refResolution:exercise.resolution
+                refResolution:exercise.resolution,
+                refStatement:exercise.id
               });
-            }
+              
+            
               
             }}
           >
@@ -162,11 +243,17 @@ const ExercisesListScreen = (props) => {
               <ListItem.Title>Ejercicio: {exercise.sequence}</ListItem.Title>
               <ListItem.Subtitle>{exercise.text}</ListItem.Subtitle>
             </ListItem.Content>
-                    {  !exercise.pay &&
+                    {/*  !exercise.pay &&
                     
                     <TouchableOpacity     
-                        style = {tw`bg-gray-200 ` } 
-                        onPress={() => buyExercise(exercise.id, exercise.price)}>
+                        
+                        onPress={() => {
+                          navigation.navigate("SolutionScreen", {
+                            refResolution:exercise.resolution,
+                            refStatement:exercise.id
+                          });
+                          buyExercise(exercise.id, exercise.price)
+                        }}>
                         
                         <View style={tw `pt-2`}>
                             <Image
@@ -175,7 +262,7 @@ const ExercisesListScreen = (props) => {
                             />
                             <Text style= {tw` font-semibold`}> {exercise.price} stars</Text>  
                         </View>
-                    </TouchableOpacity>}
+                      </TouchableOpacity>*/}
           </ListItem>
         );
       })}

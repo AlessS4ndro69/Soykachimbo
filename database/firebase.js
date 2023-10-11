@@ -1,7 +1,8 @@
 
 import { initializeApp } from 'firebase/app';
-import {getFirestore } from 'firebase/firestore'
+import {getFirestore, initializeFirestore } from 'firebase/firestore'
 import {FIREBASE_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, APP_ID} from "@env"
+import * as Device from 'expo-device';
 
 /*
 const firebaseConfig = {
@@ -23,6 +24,19 @@ const firebaseConfig = {
 
 
 const firebase = initializeApp(firebaseConfig);
-//const firestore = getFirestore(app);
+/*
+let db;
 
+if (Device.isDevice){
+    db = getFirestore(firebase);
+}else{
+    db = initializeFirestore(firebase,{
+        experimentalForceLongPolling: true
+    })    
+}*/
+const db = initializeFirestore(firebase,{
+    experimentalForceLongPolling: true
+})
+
+export {db};
 export default firebase;

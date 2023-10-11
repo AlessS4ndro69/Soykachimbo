@@ -6,6 +6,7 @@ import { usePreventScreenCapture } from 'expo-screen-capture';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { ListItem } from 'react-native-elements';
 import {TYPESENSE_KEY} from "@env";
+import BannerAdGoogle from '../components/BannerAdGoogle';
 
 import firebase from '../../database/firebase';
 import { collection, getDocs, getFirestore, query, getDoc, doc, setDoc} from 'firebase/firestore';
@@ -179,7 +180,7 @@ const ResultSearchScreen = (props) => {
             
         </View>
         </ScrollView>
-        
+        <BannerAdGoogle/>
         </SafeAreaView>
         );
     

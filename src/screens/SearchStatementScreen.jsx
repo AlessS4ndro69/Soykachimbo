@@ -10,6 +10,7 @@ import UserContext from "../context/UserContext";
 import OCR from "../components/OCR";
 import ChatgptComponent from "../components/ChatgptComponent";
 import { ScrollView } from "react-native-gesture-handler";
+import BannerAdGoogle from "../components/BannerAdGoogle";
 
 
 
@@ -154,6 +155,7 @@ const SearchStatementScreen = () => {
                                 {useChatgpt && requestText &&<Text style = {tw`text-base font-black`}>Nota: Se recomienda consultar con el docente la propuesta de ChatGpt, pues aún es una tecnología en constante evolución</Text>}
                                 {requestText && uploadStatement && <UploadStatementComponent textOCR = {requestText} captureFilename = {captureFilename} imageOcr = {imageOcr} />}
                                 {useChatgpt && requestText && !uploadStatement && <Button title ={"Necesito ayuda del profesor"} onPress={() => setUploadStatement(true)}/>}
+                                <BannerAdGoogle/>
                                 
         </SafeAreaView>
         

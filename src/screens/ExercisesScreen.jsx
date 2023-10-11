@@ -1,12 +1,14 @@
-import { Text, View, FlatList, TouchableOpacity, Image } from "react-native";
+import { Text, View, FlatList, TouchableOpacity, Image, SafeAreaView } from "react-native";
 import { Icon } from "react-native-elements";
+import { StatusBar } from "expo-status-bar";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import tw from "twrnc";
-import RepositoryList from "../components/RepositoryList";
+import ExerciseList from "../components/ExerciseList";
+
 import HeaderComponent from "../components/HeaderComponent";
 import FooterComponent from "../components/FooterComponent";
-import { SafeAreaView } from "react-native-safe-area-context";
 
+import BannerAdGoogle from "../components/BannerAdGoogle";
 
 
 const ExercisesScreen = () => {
@@ -15,8 +17,11 @@ const ExercisesScreen = () => {
     return (
         <SafeAreaView style = {tw`bg-white h-full `}>
             <HeaderComponent course ={route.params.course}/>
-            <RepositoryList codeCourse = {route.params.codeCourse}/>
-            <FooterComponent/>
+            <ExerciseList codeCourse = {route.params.codeCourse} buy = {route.params.buy}/>
+
+            <BannerAdGoogle/>
+            <FooterComponent onSlider = {true}/>
+            <StatusBar style="auto" />
         </SafeAreaView>
         
         

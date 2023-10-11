@@ -1,14 +1,19 @@
 import React, {useEffect, useState, useContext} from 'react';
 import { Image, Text, StyleSheet, View, ScrollView, TouchableOpacity, TextInput, Button, Alert } from 'react-native';
-import { BlurView } from 'expo-blur';
+
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { collection, addDoc, getFirestore, setDoc, doc, getDoc } from 'firebase/firestore';
+import * as SecureStore from 'expo-secure-store';
+import * as Updates from 'expo-updates';
+
 import UserContext from '../context/UserContext';
 
 import firebase from '../../database/firebase';
 import { useNavigation } from '@react-navigation/native';
+import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
+import { db } from '../../database/firebase';
 
-const db = getFirestore(firebase);
+//const db = getFirestore(firebase);
 const COLLECTIONUSERS = 'users';
 const COLLECTIONSTARS = 'users_stars';
 
@@ -16,16 +21,36 @@ const uri = 'https://ak.picdn.net/shutterstock/videos/1060308725/thumb/1.jpg'
 let profilePicture = 'https://i.pinimg.com/originals/f8/37/13/f83713c369bd8e4422db28d802e5c4ff.png'
 
 
+async function save(key, value) {
+  await SecureStore.setItemAsync(key, value);
+}
+
+async function getValueFor(key) {
+  let result = await SecureStore.getItemAsync(key);
+  if (result) {
+    //alert("🔐 Here's your value 🔐 \n" + result);
+    return result;
+  } else {
+    //alert('No values stored under that key.');
+    return null;
+  }
+}
+
+
 const AuthSession = () =>{
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [uid, setUid] = useState(null);
+    const [goLogin, setGoLogin] = useState(false);
+    const [goRegister, setGoRegister] = useState(false);
 
     const navigation = useNavigation();
-    const {user, login, logout, setAssets} = useContext(UserContext);
+    const {login, setAssets} = useContext(UserContext);
 
     const app = firebase;
     const auth = getAuth(app);
+    
+    
 
     if(email){
       profilePicture = 'https://robohash.org/' + email;
@@ -100,17 +125,35 @@ const AuthSession = () =>{
         const  refHolding = doc(db, 'users_holding', user.refHolding );
         const docuHolding = await getDoc(refHolding);
 
+        ////////// ASSETS DEL APP PARA CONTROLAR COMPORTAMIENTO Y AGREGAR ELEMENTOS A HOMESCREEN ///////
         const refAssets = doc(db, "assets","assets");
         const docAssets = await getDoc(refAssets);
         const assets = docAssets.data();
-        setAssets(assets);
 
+        const refCategories = doc(db, "assets", "assets_categories");
+        const docCategories = await getDoc(refCategories);
+        const categories = docCategories.data();
+
+        const refNews = doc(db, "assets", "assets_news");
+        const docNews = await getDoc(refNews);
+        const news = docNews.data();
+
+        const refAdidas = doc(db, "assets", "assets_adidas");
+        const docAdidas = await getDoc(refAdidas);
+        const adidas = docAdidas.data();
+
+        //////////// TERMINO DE LLAMADO DE ASSETS     //////////////
+
+
+        setAssets({...assets,...categories,...news,...adidas});
+        
         //////// set User in context
         const countStars = docuStars.data().countStars;
         const exercisesHolding = docuHolding.data().exercisesHolding;
         const coursesHolding = docuHolding.data().coursesHolding;
 
         login({...user, countStars: countStars, exercisesHolding: exercisesHolding, coursesHolding: coursesHolding});
+        save("uid", uid);
         
       }else{
         console.log('user no existe');
@@ -119,7 +162,38 @@ const AuthSession = () =>{
       
       
     };
+    const checkForUpdates = async () => {
+      try {
+        const update = await Updates.checkForUpdateAsync();
+        if (update.isAvailable) {
+          await Updates.fetchUpdateAsync();
+          await Updates.reloadAsync();
+        }
+      } catch (error) {
+        console.log('Error checking for updates:', error);
+      }
+  };
 
+    useEffect(() => {
+      //setGoLogin(false);
+      //setGoRegister(false);
+      const f = async() => {
+        const userid = await getValueFor("uid");
+        if(userid){
+          console.log("existe value para  uid");
+          setUid(userid);
+          getUser(userid);
+          
+          navigation.navigate('HomeScreen');
+          
+          
+        }
+        console.log("estamos en efect de auth");
+      };
+      f();
+      checkForUpdates();
+
+    },[]);
 
     return (
       <View style={styles.container}>
@@ -134,25 +208,48 @@ const AuthSession = () =>{
           alignItems: 'center',
           justifyContent: 'center',
         }}> 
-          <BlurView intensity={100}>
-            <View style={styles.login}>
+          <View>
+            {!goLogin && !goRegister && <View style={styles.login}>
+              <Image source={{ uri: profilePicture }} style={styles.profilePicture} />
+              <TouchableOpacity onPress={()=>{setGoLogin(true)}} style={[styles.button, {backgroundColor: '#00CFEB90'}]}>
+                <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Iniciar Sesion</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setGoRegister(true)} style={[styles.button, {backgroundColor: '#6792F090'}]}>
+                <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Crear Cuenta</Text>
+              </TouchableOpacity>
+            </View>}
+
+            { goLogin && <View style={styles.login}>
               <Image source={{ uri: profilePicture }} style={styles.profilePicture} />
               <View>
-                <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>E-mail</Text>
-                <TextInput onChangeText={(text) => setEmail(text)} style={styles.input} placeholder="user@domain.com" />
-              </View>
+                  <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>E-mail</Text>
+                  <TextInput onChangeText={(text) => setEmail(text)} style={styles.input} placeholder="user@domain.com" />
+                </View>
+                <View>
+                  <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Password</Text>
+                  <TextInput onChangeText={(text) => setPassword(text)} style={styles.input} placeholder="password" secureTextEntry={true}/>
+                </View>
+                <TouchableOpacity onPress={handleSignIn} style={[styles.button, {backgroundColor: '#00CFEB90'}]}>
+                  <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Ingresar</Text>
+                </TouchableOpacity>
+              </View>}
+            { goRegister && <View style={styles.login}>
+              <Image source={{ uri: profilePicture }} style={styles.profilePicture} />
               <View>
-                <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Password</Text>
-                <TextInput onChangeText={(text) => setPassword(text)} style={styles.input} placeholder="password" secureTextEntry={true}/>
-              </View>
-              <TouchableOpacity onPress={handleSignIn} style={[styles.button, {backgroundColor: '#00CFEB90'}]}>
-                <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Login</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={handleCreateAccount} style={[styles.button, {backgroundColor: '#6792F090'}]}>
-                <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Create Account</Text>
-              </TouchableOpacity>
-            </View>
-          </BlurView>
+                  <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>E-mail</Text>
+                  <TextInput onChangeText={(text) => setEmail(text)} style={styles.input} placeholder="user@domain.com" />
+                </View>
+                <View>
+                  <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Password</Text>
+                  <TextInput onChangeText={(text) => setPassword(text)} style={styles.input} placeholder="password" secureTextEntry={true}/>
+                </View>
+                
+                <TouchableOpacity onPress={handleCreateAccount} style={[styles.button, {backgroundColor: '#6792F090'}]}>
+                  <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Ingresar</Text>
+                </TouchableOpacity>
+              </View>}
+
+          </View>
         </ScrollView>
       </View>
     );

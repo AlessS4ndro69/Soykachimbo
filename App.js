@@ -1,6 +1,8 @@
 
 import Main from './src/components/Main'
-import { NativeRouter } from 'react-router-native'
+import { NativeRouter } from 'react-router-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import 'expo-dev-client';
 
 
 // web : 166149408149-pclatpuu2d4mmcgrpivapgkr9v64mmv0.apps.googleusercontent.com
@@ -9,7 +11,7 @@ import { NativeRouter } from 'react-router-native'
 
 export default function App() {
   
-  return <NativeRouter><Main /></NativeRouter>
+  return <SafeAreaProvider><Main /></SafeAreaProvider>
   
 }
 

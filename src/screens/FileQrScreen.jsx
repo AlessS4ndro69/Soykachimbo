@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { View, Text, Button } from "react-native";
 import UserContext from "../context/UserContext";
 import HeaderComponent from "../components/HeaderComponent";
-import RepositoryList from "../components/RepositoryList";
+import ExerciseList from "../components/ExerciseList";
 import { useNavigation } from "@react-navigation/native";
 
 
@@ -18,7 +18,7 @@ const FileQrScreen = (props) => {
             <Text>Code course: {props.codeCourse}</Text>
             <Text>Week: {props.week}</Text>
             {/*<HeaderComponent course ={"Práctica"}/>*/}
-            {/*<RepositoryList codeCourse = {parseInt(props.codeCourse)}/>*/}
+            {/*<ExerciseList codeCourse = {parseInt(props.codeCourse)}/>*/}
             {<Button 
                 
                 onPress={() => navigation.navigate('ExercisesScreen',{

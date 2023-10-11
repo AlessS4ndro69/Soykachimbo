@@ -1,0 +1,74 @@
+{
+"data" : [
+    {
+        "courseCode": 14,
+        "title": "Aritmética",
+        "image": "https://cdn-icons-png.flaticon.com/512/4718/4718999.png"
+        
+    },
+   
+    {
+        "courseCode": 16,
+        "title": "Geometría",
+        "image": "https://cdn-icons-png.flaticon.com/128/3206/3206158.png"
+        
+    },
+    
+    {
+        "courseCode": 12,
+        "title": "Geo. Anal.",
+        "image": "https://cdn-icons-png.flaticon.com/128/3206/3206158.png"
+    
+    },
+    {
+        "courseCode": 11,
+        "title": "Trigonometría",
+        "image": "https://cdn-icons-png.flaticon.com/128/9978/9978999.png"
+        
+    },
+    {
+        "courseCode": 10,
+        "title": "Raz. Mate. 1",
+        "image": "https://cdn-icons-png.flaticon.com/128/9041/9041926.png"
+        
+    },
+    {
+        "courseCode": 17,
+        "title": "Psicotécnico",
+        "image": "https://cdn-icons-png.flaticon.com/128/6938/6938770.png"
+        
+    },
+    {
+        "courseCode": 13,
+        "title": "Algebra",
+        "image": "https://cdn-icons-png.flaticon.com/128/2861/2861731.png"
+        
+    },
+    
+    {
+        "courseCode": 15,
+        "title": "Raz. Mate. 2",
+        "image": "https://cdn-icons-png.flaticon.com/128/9041/9041926.png"
+        
+    },
+
+    {
+        "courseCode": 101,
+        "title": "Física",
+        "image": "https://cdn-icons-png.flaticon.com/128/3247/3247965.png"
+        
+    },
+
+    {
+        "courseCode": 102,
+        "title": "Química",
+        "image": "https://cdn-icons-png.flaticon.com/128/6691/6691388.png"
+        
+    }
+
+    
+    
+    
+    
+]
+}

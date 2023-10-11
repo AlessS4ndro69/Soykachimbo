@@ -2,12 +2,12 @@
   "expo": {
     "name": "soykachimbo",
     "slug": "soykachimbo",
-    "version": "2.5.0",
+    "version": "2.9.6",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/adaptive-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,6 +21,12 @@
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
+      ],
+      [
+        "expo-updates",
+        {
+          "username": "aless4ndro"
+        }
       ]
     ],
     "assetBundlePatterns": [
@@ -28,7 +34,10 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.aless4ndro.soykachimbo"
+      "bundleIdentifier": "com.aless4ndro.soykachimbo",
+      "config": {
+        "usesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -39,7 +48,7 @@
         "android.permission.RECORD_AUDIO"
       ],
       "package": "com.aless4ndro.soykachimbo",
-      "versionCode": 7
+      "versionCode": 20
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -49,5 +58,8 @@
         "projectId": "d0302363-bc85-4488-9a8c-1c51e06449a9"
       }
     }
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-4929040887239501~6730053827"
   }
 }

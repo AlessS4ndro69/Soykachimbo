@@ -4,74 +4,9 @@ import { Text, View, FlatList, TouchableOpacity, Image } from "react-native";
 import { Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import tw from "twrnc";
-
-
-
-
-const data = [
-    /*{
-        courseCode: 14,
-        title: "Aritmética",
-        image: "https://cdn-icons-png.flaticon.com/512/4718/4718999.png",
-        //screen: "ExercisesScreen",
-    },
-   
-    {
-        courseCode: 16,
-        title: "Geometría",
-        image: "https://cdn-icons-png.flaticon.com/128/3206/3206158.png",
-        //screen: "ExercisesScreen",
-    },
-    
-    {
-        courseCode: 12,
-        title: "Geo. Anal.",
-        image: "https://cdn-icons-png.flaticon.com/128/3206/3206158.png",
-        //screen: "ExercisesScreen",
-    },*/
-    {
-        courseCode: 11,
-        title: "Trigonometría",
-        image: "https://cdn-icons-png.flaticon.com/128/9978/9978999.png",
-        //screen: "ExercisesScreen",
-    },
-    {
-        courseCode: 10,
-        title: "Raz. Mate. 1",
-        image: "https://cdn-icons-png.flaticon.com/128/9041/9041926.png",
-        //screen: "ExercisesScreen",
-    },
-    {
-        courseCode: 17,
-        title: "Psicotécnico",
-        image: "https://cdn-icons-png.flaticon.com/128/6938/6938770.png",
-        //screen: "ExercisesScreen",
-    },
-    {
-        courseCode: 13,
-        title: "Algebra",
-        image: "https://cdn-icons-png.flaticon.com/128/2861/2861731.png",
-        //screen: "ExercisesScreen",
-    },
-    
-    {
-        courseCode: 15,
-        title: "Raz. Mate. 2",
-        image: "https://cdn-icons-png.flaticon.com/128/9041/9041926.png",
-        //screen: "ExercisesScreen",
-    }
-    
-    
-    
-    
-];
-
-
-//////// price  53 average
+import {data} from "../../AreaList.json"
 
 let pay = false;
-
-
 
 const AreaList = () => {
     const navigation = useNavigation();
@@ -81,7 +16,7 @@ const AreaList = () => {
     const coincidencias = coursesHolding.filter((course) => course.week == _week );
     console.log('array de coincidencia: ', coincidencias);
     const price = priceCourse;    
-
+    //console.log("catalogue: por course y semana", catalogue["code_"+11]["week_"+_week]["number_exercises"]);
 
     
     
@@ -98,17 +33,32 @@ const AreaList = () => {
 
             ////// se modifica la data con los cursos comprados
             data = {data.map(function (element){
+                let number_exercises;
+                if(catalogue["code_"+element.courseCode]){
+                    number_exercises = catalogue["code_"+element.courseCode]["week_"+_week]?.number_exercises;
+                    console.log("n exercises ", number_exercises);
+                }else{
+                    number_exercises = 0;
+                }
+                
+                
                 if(coincidencias.find((e) => e.codeCourse == element.courseCode  )){
-                    return {...element, pay: true, price: price + Math.floor(Math.random()*(10))}
+                    return {...element, isVisible: number_exercises !==0, pay: true, price: price? price + Math.floor(Math.random()*(10)): 0 }
+                    //return {...element, pay: true, price: price }
                 }
                 else{
-                    return {...element, pay: false, price:  price + Math.floor(Math.random()*(10))}
+                    return {...element,isVisible: number_exercises !==0, pay: false, price: price? price + Math.floor(Math.random()*(10)): 0}
+                    //return {...element, pay: false, price: price}
                 }
                 
             })}
 
             keyExtractor = {(item) => item.courseCode}
-            renderItem={({ item }) => (
+            renderItem={({ item }) => {
+                if(!item.isVisible){
+                    return null;
+                }
+                return (
                 <View style= {tw`flex-row p-2 pb-2 bg-gray-200 m-1 w-full justify-between`}> 
                     <TouchableOpacity
                     onPress={() => {
@@ -117,7 +67,8 @@ const AreaList = () => {
                             course: item.title,
                             
                         })
-                    }} 
+                    }}
+                    
                     //style = {tw` p-2 pl-10 pb-4 bg-gray-200 m-2 w-9/12`}
                     >
 
@@ -139,13 +90,19 @@ const AreaList = () => {
                         
                     </View>
                     </TouchableOpacity>
-                    { !item.pay &&
+                    {/* !item.pay &&
                     <TouchableOpacity 
-                        
+                        disabled = {!item.isVisible}
                         style = {tw`bg-gray-200 mr-2` } 
                         onPress={() => {
+                            //navigation.navigate('HomeScreen');
+                            navigation.navigate('ExercisesScreen',{
+                                codeCourse: item.courseCode,
+                                course: item.title,
+                                buy: true
+                            })
                             buyCourse(item.courseCode, item.price , _week); 
-                            navigation.navigate('HomeScreen');
+                            
                             }
                             
                         }>
@@ -157,10 +114,10 @@ const AreaList = () => {
                             />
                             <Text style= {tw` font-semibold`}> {item.price} stars</Text>  
                         </View>
-                    </TouchableOpacity>}
+                    </TouchableOpacity>*/}
                 </View>
                 
-            )}
+            )}}
         />
         
     );

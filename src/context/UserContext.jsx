@@ -25,17 +25,37 @@ const UserProvider = ({children}) => {
     const [user, setUser] = useState(initialUser);
     const [_week, setWeek] = useState(3);
     const [catalogue, setCatalogue] = useState({});
+    const [categories, setCategories] = useState([]);   /// para agregar views a home screen
+    const [news, setNews] = useState([]);   /// para agregar views a home screen
+    const [adidasUri, setAdidas] = useState("");
     const [priceExercise, setPriceExercise] = useState(0);
-    const [priceCourse, setPriceCourse] = useState(0);
+    const [priceCourse, setPriceCourse] = useState(null);
     //// holding no se actualiza en los campos de user :(
     const [exercisesHolding, setExercisesHolding] = useState([]);
     const [coursesHolding, setCoursesHolding] = useState([]);
+    const [updateData, setUpdateData] = useState(true); /// el número indica el elemento a actualizar
+    // 1 -> actualizar CoursesHolding
+    const [modeScreen, setModeScreen] = useState(0);   ///// 1 videos, 2 recursos,... 
+    const [loadingData, setLoadingData] = useState(false);
+
+
 
     const setAssets = (assets) => {
-        console.log("obteniendo assets: ", assets);
-        setPriceExercise(assets.price_exercise);
-        setPriceCourse(assets.price_course);
+        console.log("obteniendo assets catagloque: ", assets.catalogue);
+        console.log("obteniendo assets categories: ", assets.data_categories);
+        console.log("obteniendo assets news: ", assets.data_news);
+        if(assets.priceFree){
+            setPriceExercise(0);
+            setPriceCourse(0);
+        }else{
+            setPriceExercise(assets.price_exercise);
+            setPriceCourse(assets.price_course);
+        }
+        
         setCatalogue(assets.catalogue);
+        setCategories(assets.data_categories);
+        setNews(assets.data_news);
+        setAdidas(assets.adidas_uri);
     };
     const _setWeek = (val) => {
         setWeek(val);
@@ -114,11 +134,12 @@ const UserProvider = ({children}) => {
 
 
             setExercisesHolding(exercisesHolding => [...exercisesHolding, id]);
-            Alert.alert('Gracias por tu compra');
+            //Alert.alert('Gracias por tu compra');
             console.log(user);
             console.log(exercisesHolding);
         }else{
             Alert.alert('No cuenta con estrellas suficientes :(');
+            navigation.goBack();
         }
     };
 
@@ -132,16 +153,23 @@ const UserProvider = ({children}) => {
             });
 
             setCoursesHolding(coursesHolding => [...coursesHolding,{codeCourse: id, week: week}])
-            Alert.alert('Gracias por tu compra');
+            //Alert.alert('Gracias por tu compra');
             console.log(user);
             console.log(coursesHolding);
 
         }else{
-            Alert.alert('no cuenta con estrellas suficientes');
+            Alert.alert('no cuenta con estrellas suficientes :(');
+            navigation.goBack();
         }
     };
 
-    const data = {user, login, setAssets, priceExercise, priceCourse, logout, incrementStars, decreaseStars, _week, _setWeek, buyOcr, buyExercise, buyCourse, exercisesHolding, coursesHolding, catalogue}; //// usuario y semana
+    const data = {
+        user, login, setAssets, priceExercise, priceCourse, logout, 
+        incrementStars, decreaseStars, _week, _setWeek, buyOcr, 
+        buyExercise, buyCourse, exercisesHolding, coursesHolding, 
+        catalogue, categories, news, setUpdateData, updateData,
+        modeScreen, setModeScreen, loadingData, setLoadingData, adidasUri
+    }; //// usuario y semana
 
     return (
         <UserContext.Provider value = {data}>

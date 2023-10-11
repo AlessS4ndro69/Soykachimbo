@@ -1,0 +1,65 @@
+{
+    "preguntas": [
+      {
+        "id": 0,
+        "pregunta": "¿Cuál es el nombre que se le da a la medida o tamaño del vector?",
+        "opciones": [
+          "Magnitud",
+          "Intensidad",
+          "Dirección",
+          "Módulov",
+          "Sentido"
+        ],
+        "respuesta_correcta": "Módulov"
+      },
+      {
+        "id": 1,
+        "pregunta": "¿Cómo se define la dirección de un vector?",
+        "opciones": [
+          "A partir del semieje Y positivo",
+          "A partir del semieje Z positivo",
+          "A partir del semieje X positivo",
+          "En sentido horario",
+          "En sentido antihorario"
+        ],
+        "respuesta_correcta": "A partir del semieje X positivo"
+      },
+      {
+        "id": 2,
+        "pregunta": "¿Qué indica el sentido de un vector?",
+        "opciones": [
+          "La longitud del vector",
+          "La intensidad del vector",
+          "La magnitud del vector",
+          "La dirección del vector",
+          "La orientación del vector"
+        ],
+        "respuesta_correcta": "La orientación del vector"
+      },
+      {
+        "id": 3,
+        "pregunta": "¿Qué es la línea de acción de un vector?",
+        "opciones": [
+          "La línea que une dos puntos del vector",
+          "La línea imaginaria que atraviesa el punto de aplicación del vector",
+          "La línea que conecta el origen del vector con su extremo",
+          "La trayectoria que sigue el vector en el espacio",
+          "La línea que separa el módulo y la dirección del vector"
+        ],
+        "respuesta_correcta": "La línea imaginaria que atraviesa el punto de aplicación del vector"
+      },
+      {
+        "id": 4,
+        "pregunta": "¿Qué son los vectores libres?",
+        "opciones": [
+          "Vectores que no tienen módulo ni dirección",
+          "Vectores que solo pueden ubicarse en el origen",
+          "Vectores que pueden moverse sin restricciones a lo largo de su línea de acción",
+          "Vectores que no tienen sentido",
+          "Vectores que tienen módulo y dirección pero no sentido"
+        ],
+        "respuesta_correcta": "Vectores que pueden moverse sin restricciones a lo largo de su línea de acción"
+      }
+    ]
+  }
+  

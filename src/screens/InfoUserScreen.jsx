@@ -1,8 +1,8 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import { Image, Text, StyleSheet, View, ScrollView, TouchableOpacity, TextInput, Button, Alert } from 'react-native';
-import { BlurView } from 'expo-blur';
-import { useNavigation } from '@react-navigation/native';
 
+import { useNavigation } from '@react-navigation/native';
+import * as SecureStore from 'expo-secure-store';
 
 import UserContext from '../context/UserContext';
 
@@ -10,17 +10,19 @@ import UserContext from '../context/UserContext';
 const uri = 'https://ak.picdn.net/shutterstock/videos/1060308725/thumb/1.jpg'
 
 
-
 const InfoUserScreen = () =>{
     const {user, logout} = useContext(UserContext);
     const navigation = useNavigation();
     const profilePicture = 'https://robohash.org/' + user?.email;
+    
 
     const toLogout = () => {
         console.log("logoutt....");
         logout();
         navigation.navigate('AuthSession');
     };
+
+    
 
     return (
       <View style={styles.container}>
@@ -35,10 +37,11 @@ const InfoUserScreen = () =>{
           alignItems: 'center',
           justifyContent: 'center',
         }}> 
-          <BlurView intensity={100}>
+          <View >
             <View style={styles.login}>
               <Image source={{ uri: profilePicture }} style={styles.profilePicture} />
               <View>
+              
                 <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>E-mail</Text>
                 <Text style={styles.input}> {user?.email} </Text>
                 
@@ -49,7 +52,7 @@ const InfoUserScreen = () =>{
                 
               </View>
               
-              <TouchableOpacity 
+              {/*<TouchableOpacity 
                 style={styles.buttonRecharge}
                 onPress={() => navigation.navigate('ScanQRScreen',{
                   mode: 1
@@ -59,7 +62,7 @@ const InfoUserScreen = () =>{
                     source = {{uri : 'https://cdn-icons-png.flaticon.com/512/4645/4645459.png'}}
                 />
                 <Text>Recarga de estrellas</Text>
-              </TouchableOpacity>
+            </TouchableOpacity>*/}
               <TouchableOpacity onPress = {() => {navigation.navigate('ProposalScreen')}}  style={[styles.button, {backgroundColor: '#00CFEB90'}]}>
                 <Text style={{fontSize: 17, fontWeight: '400', color: 'black'}}>Mis propuestas</Text>
               </TouchableOpacity>
@@ -70,7 +73,7 @@ const InfoUserScreen = () =>{
               
               
             </View>
-          </BlurView>
+          </View>
         </ScrollView>
       </View>
     );
@@ -106,7 +109,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderColor: '#fff',
     borderWidth: 1,
-    marginVertical: 30
+    marginVertical: 20
   },
   input: {
     width: 250,

@@ -8,6 +8,8 @@ import tw from "twrnc";
 import UpdateStarsComponent from "../components/UpdateStarsComponent";
 import ScanQrComponent from "../components/ScanQrComponent";
 import FileQrScreen from "./FileQrScreen";
+import StarAnimation from "../components/StarAnimationComponent";
+import BannerAdGoogle from "../components/BannerAdGoogle";
 
 
 
@@ -25,6 +27,7 @@ const ScanQRScreen = (props) => {
   //const [text, setText] = useState('nF5KEEZ6F5suKmVJOmcn/210');
   const [text, setText] = useState('');
   const [info, setInfo] = useState('No info');
+  
   
 /*
   const askForCameraPermission = () => {
@@ -84,9 +87,12 @@ const ScanQRScreen = (props) => {
         {text && mode1 && <UpdateStarsComponent id={text.split('/')[0]} quantityStars = {text.split('/')[1]}/>}
 
         {text && mode2 && <FileQrScreen codeCourse = {text.split('/')[0]} week = {text.split('/')[1]}/>}
-        {mode1 && <Text style={tw`text-base font-black `}> Escanea el código QR para recargar estrellas, adquiere códigos comunicandote al número 925968311.</Text>}
-        {mode2 && <Text style={tw`text-base font-black `}> Escanea el código QR de la práctica deseada.</Text>}
+        {mode1 && <Text style={tw`text-center text-black text-opacity-50`}> Escanea el código QR para recargar estrellas, estrellas gratis todos los Miércoles.</Text>}
+        {/*mode1 && <StarAnimation/>*/}
+        {mode2 && <Text style={tw`text-center text-black text-opacity-50 `}> Escanea el código QR de la práctica deseada.</Text>}
         {/* mode2 && <FileQrScreen codeCourse = {12} week = {23}/>*/}
+        
+        <BannerAdGoogle/>
       </SafeAreaView>     
     );
 };
