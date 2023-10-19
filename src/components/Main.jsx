@@ -13,12 +13,16 @@ import SearchStatementScreen from '../screens/SearchStatementScreen';
 import ProposalListScreen from './ProposalList';
 import ProposalScreen from '../screens/ProposalScreen';
 import ResultSearchScreen from '../screens/ResultSearchScreen';
-import QuestionScreen from '../screens/QuestionsScreen';
+
 import CheatSheetScreen from '../screens/CheatSheetScreen';
 import GeneralScreen from '../screens/GeneralScreen';
 import SolverScreen from '../screens/SolverScreen';
 import PracticeTiktokScreen from '../screens/PracticeTiktokScreen';
-
+import PaginationScreen from '../screens/PaginationScreen';
+import EvaluationScreen from '../screens/EvaluationScreen';
+import EvaluationResultScreen from '../screens/EvaluationResultScreen';
+import QuestionScreen from '../screens/QuestionScreen';
+import EvaluationSolutionScreen from '../screens/EvaluationSolutionScreen';
 
 
 //import GoogleAuthSession from './GoogleAuthSession';
@@ -110,13 +114,7 @@ function MyStack(){
             headerShown: false
           }}
         />
-        <Stack.Screen
-          name = 'QuestionScreen'
-          component={QuestionScreen}
-          options={{
-            headerShown: false
-          }}
-        />
+        
         <Stack.Screen
           name = 'CheatSheetScreen'
           component={CheatSheetScreen}
@@ -145,7 +143,41 @@ function MyStack(){
             headerShown: false
           }}
         />
-        
+        <Stack.Screen
+          name = "PaginationScreen"
+          component={PaginationScreen}
+          options={{
+            headerShown: false
+          }}
+        />
+        <Stack.Screen 
+          name = "EvaluationScreen"
+          component={EvaluationScreen}
+          options={{
+            headerShown: false
+          }}
+        />
+        <Stack.Screen
+          name = "EvaluationResultScreen"
+          component={EvaluationResultScreen}
+          options={{
+            headerShown: false
+          }}
+        />
+        <Stack.Screen
+          name = "QuestionScreen"
+          component={QuestionScreen}
+          options={{
+            headerShown: false
+          }}
+        />
+        <Stack.Screen
+          name= 'EvaluationSolutionScreen'
+          component={EvaluationSolutionScreen}
+          options={{
+            headerShown: false
+          }}
+        />
         {
           /*<Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Courses" component={CoursesScreen} />

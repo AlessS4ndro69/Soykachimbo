@@ -113,7 +113,7 @@ const HeaderComponent = (props) => {
                     </TouchableOpacity>
                     <TouchableOpacity 
                         style={{ alignItems: 'center' }}
-                        onPress={() => navigation.navigate('SolverScreen')}
+                        onPress={() => navigation.navigate('EvaluationScreen')}
                     >
                         <FAIcon 
                             name="book" size={20} color="#FF0000" 

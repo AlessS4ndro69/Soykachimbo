@@ -22,7 +22,8 @@ const PubComponent = () => {
         
         onPress={()=>{
           console.log("presionaste pubg");
-          navigation.navigate("PracticeTiktokScreen");
+          //navigation.navigate("PracticeTiktokScreen");
+          navigation.navigate("EvaluationScreen");
         }}
       >
       <Image

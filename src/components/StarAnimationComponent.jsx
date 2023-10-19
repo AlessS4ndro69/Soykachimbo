@@ -2,26 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { TouchableOpacity,Text, Animated, Easing, View, StyleSheet, Alert } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Svg, { Path } from 'react-native-svg';
-import moment from 'moment';
-import tw from 'twrnc';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-
-const dayOfWeek = moment().format('dddd');
-const dateOfMonth = moment().date();
-const BlackFriday = 3; /// 0 Domingo, 1 LUnes, ....  /// agregar a firebase
-//let date = "";
-
-const weekInSpanish = {
-  Sunday: "Domingo",
-  Monday: "Lunes",
-  Tuesday: "Martes",
-  Wednesday: "Miércoles",
-  Thursday: "Jueves",
-  Friday: "Viernes",
-  Saturday: "Sábado"
-};
 const getRandomValue = (min, max) => {
   return Math.random() * (max - min) + min;
 };
@@ -32,29 +14,8 @@ const getRandomAnimation = () => {
 
 const StarAnimation = () => {
   const [animationStarted, setAnimationStarted] = useState(false);
-  const [numberStars, setNumberStars] = useState(0);
-  const [claimAprize, setClaimAprize] = useState(false);
-  const [disabledButton, setDisabledButton] = useState(true);
-  const [dateStorage, setDateStorage] = useState(0);
-  const [goAnimation, setGoAnimation] = useState(false);
- 
-
 
   const startAnimation = () => {
-    if(numberStars < 3){
-      setNumberStars(numberStars+1);
-    }else{
-      setClaimAprize(true);
-      setDisabledButton(false);
-      setGoAnimation(false);
-      const position = moment().day(dayOfWeek).isoWeekday();
-      const nextMonday = moment().day(3).add(1, 'weeks'); ////// 1 Lunes , 2 Martes 3 Miercoles....
-      //console.log(nextMonday); 
-      //console.log(nextMonday.day());  //// number 1=Lunes,...
-      console.log(nextMonday.format('dddd')); // string con nombre del dia en ingles
-      AsyncStorage.setItem('BlackFriday', JSON.stringify( nextMonday.date()));
-    }
-    
     
     setAnimationStarted(true);
     setTimeout(() => {
@@ -66,7 +27,7 @@ const StarAnimation = () => {
     <Animatable.View
       key={index}
       animation={animationStarted ? getRandomAnimation() : null}
-      duration={2000}
+      duration={3000}
       easing="linear"
       useNativeDriver
       style={{
@@ -79,65 +40,29 @@ const StarAnimation = () => {
       }}
     />
   ));
-
-  useEffect(()=>{
-    
-    const f = async (key) => {
-      try {
-        const value = await AsyncStorage.getItem(key);
-    
-        if (value === null || value === undefined) {
-          console.log(`No existe valor para la clave "${key}".`);
-          const nextDay = moment().day(3).add(1, 'weeks'); ////// 1 Lunes , 2 Martes 3 Miercoles....
-          AsyncStorage.setItem('BlackFriday', JSON.stringify( nextDay.date()));
-        } else {
-          console.log(`El valor para la clave "${key}" es:`, value);
-          setDateStorage(value);
-        }
-      } catch (error) {
-        console.log('Error al validar el valor:', error);
-      }
-    };
-    
-    f('BlackFriday');
-  });
-
   
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAnimationStarted(true);
+      setTimeout(() => {
+        setAnimationStarted(false);
+      }, 2000);
+    }, 10500); // Cambia el intervalo de tiempo aquí (2500ms = 2.5 segundos)
+    
+    // Limpia el intervalo cuando el componente se desmonta
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <View>
-    <Text style={tw`text-center text-black text-opacity-50`}>Hoy es {weekInSpanish[dayOfWeek]}</Text>
-    <Text style={tw`text-center text-black text-opacity-50`}>Ganaste: {numberStars} estrellas</Text>
-    {/* !claimAprize && !goAnimation && <TouchableOpacity 
-                      style = {[styles.button, {backgroundColor: '#00CFEB90'}]}
-                      onPress = {()=>{
-                        AsyncStorage.setItem('BlackFriday', JSON.stringify(18));
-
-                      }} 
-                      
-                    >
-                      <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Set day</Text>
-                    </TouchableOpacity>*/}
-    {!claimAprize && !goAnimation && <TouchableOpacity 
-                      style = {[styles.button, {backgroundColor: '#00CFEB90'}]}
-                      onPress = {()=>{
-                        console.log("iniciando");
-                        if(dateStorage != moment().date()){
-                          Alert.alert("Hoy es " + weekInSpanish[dayOfWeek] + moment().date()+ ", reclama estrellas el dia " +weekInSpanish[moment().day(BlackFriday).format('dddd')] + dateStorage);
-                        }else{
-                          setGoAnimation(true);
-                        }
-
-                      }} 
-                      
-                    >
-                      <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Quiero estrellas</Text>
-                    </TouchableOpacity>}
-    {goAnimation && <TouchableOpacity onPress={startAnimation}>
+    
+    
+    
+    {<TouchableOpacity onPress={startAnimation}>
       <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         <Animatable.View
           animation={animationStarted ? 'shake' : null}
-          duration={1000}
+          duration={4000}
           useNativeDriver
           style={{ justifyContent: 'center', alignItems: 'center' }}
         >
@@ -152,16 +77,7 @@ const StarAnimation = () => {
       </View>
       
     </TouchableOpacity>}
-    {claimAprize && <TouchableOpacity 
-                      style = {[styles.button, {backgroundColor: '#00CFEB90'}]}
-                      onPress = {()=>{
-                        console.log("reclamando");
-                        setDisabledButton(!disabledButton);
-                      }} 
-                      disabled = {disabledButton}
-                    >
-                      <Text style={{fontSize: 17, fontWeight: '400', color: 'white'}}>Reclamar estrellas</Text>
-                    </TouchableOpacity>}
+    
     
     </View>
   );

@@ -2,7 +2,7 @@
   "expo": {
     "name": "soykachimbo",
     "slug": "soykachimbo",
-    "version": "2.9.6",
+    "version": "2.9.7",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -48,7 +48,7 @@
         "android.permission.RECORD_AUDIO"
       ],
       "package": "com.aless4ndro.soykachimbo",
-      "versionCode": 20
+      "versionCode": 21
     },
     "web": {
       "favicon": "./assets/favicon.png"
