@@ -105,7 +105,7 @@ const HeaderComponent = (props) => {
                         onPress={() => navigation.navigate('HomeScreen')}
                     >
                         <FAIcon 
-                            name="home" size={20} color="#FF0000" 
+                            name="home" size={40} color="#FF0000" 
                             
                         />
                         <Text style = {tw`text-xs text-black opacity-30`}>Inicio</Text>
@@ -116,7 +116,7 @@ const HeaderComponent = (props) => {
                         onPress={() => navigation.navigate('EvaluationScreen')}
                     >
                         <FAIcon 
-                            name="book" size={20} color="#FF0000" 
+                            name="book" size={40} color="#FF0000" 
                             
                         />
                     </TouchableOpacity>
@@ -129,7 +129,7 @@ const HeaderComponent = (props) => {
                         )}
                     >
                         <FAIcon 
-                            name="file" size={20} color="#FF0000" 
+                            name="file" size={40} color="#FF0000" 
                             
                         />
                     </TouchableOpacity>
@@ -140,7 +140,7 @@ const HeaderComponent = (props) => {
                         })}
                     >
                         <FA5Icon 
-                            name="play-circle" size={20} color="#FF0000" 
+                            name="play-circle" size={40} color="#FF0000" 
                             
                         />
                         
@@ -148,10 +148,10 @@ const HeaderComponent = (props) => {
                     <TouchableOpacity 
                         style={{ alignItems: 'center' }}
                         onPress={() => navigation.navigate('CheatSheetScreen')}
-                        disabled={true}
+                        
                     >
                         <FAIcon 
-                            name="superscript" size={20} color="#FF0000" 
+                            name="superscript" size={40} color="#FF0000" 
                             
                         />
                         
@@ -178,7 +178,7 @@ const HeaderComponent = (props) => {
                         onPress={() => navigation.navigate('InfoUserScreen')}
                     >
                         <FAIcon 
-                            name="user" size={20} color="#FF0000" 
+                            name="user" size={40} color="#FF0000" 
                             
                         />
                         

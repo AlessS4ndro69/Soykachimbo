@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import tw from "twrnc";
 import {data} from "../../AreaList.json"
 
-const NUMBERQUESTIONS = 5;
+const NUMBERQUESTIONS = 10;
 
 const PracticeList = () => {
     const navigation = useNavigation();
@@ -52,7 +52,7 @@ const PracticeList = () => {
 
     return (
         <FlatList
-            data={data}
+            data={data.filter((item) => item.enabled)}
             renderItem={render}
             keyExtractor={(item) => item.courseCode}
         >       

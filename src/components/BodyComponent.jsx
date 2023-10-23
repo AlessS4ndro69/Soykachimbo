@@ -143,14 +143,16 @@ const BodyComponent = (props) => {
     if(isFinalize){
         return(
             <FlatList
-                data = {data.map((element)=>{
-                    if(dataCourses.find((e) => e.code == element.courseCode  )){
-                        const foundCourse = dataCourses.find((e) => e.code == element.courseCode);
-                        return{...element, url_videos: foundCourse.url_videos, url_libros: foundCourse.url_libros}
-                    }
-                    })
-                
-                }
+            
+            data={data.filter((element) => {
+                const foundCourse = dataCourses.find((e) => e.code === element.courseCode);
+                return foundCourse; // Devuelve true si se encontró un curso correspondiente.
+              }).map((element)=>{
+                    const foundCourse = dataCourses.find((e) => e.code == element.courseCode);
+                    return{...element, url_videos: foundCourse.url_videos, url_libros: foundCourse.url_libros}
+              })}
+
+    
     
                 keyExtractor = {(item) => item.courseCode}
                 renderItem = {render}

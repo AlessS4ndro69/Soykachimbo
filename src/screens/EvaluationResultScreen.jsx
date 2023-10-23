@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { View, Text, SafeAreaView, FlatList, ActivityIndicator, Image, Alert, Button, TouchableOpacity } from "react-native";
+import { View, Text, SafeAreaView, FlatList, ActivityIndicator, Image, Alert, Button, TouchableOpacity, ScrollView } from "react-native";
 import MyButton from "../components/MyButtonComponent";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import StarAnimation from "../components/StarAnimationComponent";
@@ -18,7 +18,7 @@ const EvaluationResultScreen = () => {
     const data = route.params.data;
     const correctAnswers = route.params.correctAnswers;
 
-    console.log("data is: ",data );
+    //console.log("data is: ",data );
 
     const handleQuestion = () => {
         if(questionNumber +1 < data.length){ //questinoNumber empieza en 0
@@ -44,7 +44,8 @@ const EvaluationResultScreen = () => {
         Image.getSize(imageUrl, (width, height) => {
             // Aquí puedes utilizar las dimensiones (width y height) de la imagen
             // para establecer el estilo de tu componente Image o realizar otras acciones.
-            console.log(`Ancho: ${width}, Alto: ${height}`);
+            //console.log(`Ancho: ${width}, Alto: ${height}`);
+            console.log("id:",data[questionNumber].id);
             setWidth(width);
             setHeight(height);
             setFinish(true);
@@ -62,6 +63,7 @@ const EvaluationResultScreen = () => {
 
     return (
         <SafeAreaView style = {tw`bg-white h-full justify-center items-center p-5`}>
+            
             <StarAnimation/>
             <Text style = {tw` text-2xl italic text-black font-bold`}>Resultados</Text>
             <Text style = {tw` text-2xl italic text-black font-bold`}>Tienes {correctAnswers} aciertos</Text>
@@ -76,11 +78,14 @@ const EvaluationResultScreen = () => {
                 <View style = {tw`p-2 mb-2 bg-blue-500 rounded`}>
                     <Text style = {tw` text-2xl italic text-white font-bold`}>Pregunta {questionNumber+1}</Text>
                 </View>
-                {isFinish && <Image style={{ width: width * 1.2, aspectRatio: width/height}}
-                    source={{uri: data[questionNumber].question}}/>}
+                {isFinish && 
+                        <Image style={{ width: width * 1.2, aspectRatio: width/height}}
+                        source={{uri: data[questionNumber].question}}/>
+                        }
                 {!isFinish && <ActivityIndicator size="large" color="blue"/>}
                 
-                <TouchableOpacity
+                {data[questionNumber].solution && <TouchableOpacity
+                
                 onPress={() => {
                     navigation.navigate("EvaluationSolutionScreen", {
                     solution: data[questionNumber].solution,
@@ -93,7 +98,7 @@ const EvaluationResultScreen = () => {
                 <Text style={{ textDecorationLine: 'underline' }}>
                     Solucionario
                 </Text>
-                </TouchableOpacity>
+                </TouchableOpacity>}
 
 
                 {!finishRevision && <MyButton text = "Siguiente pregunta" onClick = {handleQuestion}/>}

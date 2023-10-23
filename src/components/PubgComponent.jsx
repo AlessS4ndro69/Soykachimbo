@@ -19,11 +19,12 @@ const PubComponent = () => {
   return (
     <View style ={{margin:10}}>
       {uri && <TouchableOpacity
-        
+        disabled={true}
         onPress={()=>{
           console.log("presionaste pubg");
           //navigation.navigate("PracticeTiktokScreen");
-          navigation.navigate("EvaluationScreen");
+          //navigation.navigate("EvaluationScreen");
+          
         }}
       >
       <Image

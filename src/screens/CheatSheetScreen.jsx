@@ -19,8 +19,8 @@ import BannerAdGoogle from "../components/BannerAdGoogle";
     { courseCode: 16,  name: 'Geometria', icon: 'square' },
     { courseCode: 11,  name: 'Trigonometria', icon: 'angle-double-right' },
     
-    { courseCode: 101,  name: 'Quimica', icon: 'flask' },
-    { courseCode: 102,  name: 'Fisica', icon: 'rocket' },
+    //{ courseCode: 101,  name: 'Quimica', icon: 'flask' },
+    //{ courseCode: 102,  name: 'Fisica', icon: 'rocket' },
   ];
     
       

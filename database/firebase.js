@@ -29,11 +29,13 @@ let db;
 
 if (Device.isDevice){
     db = getFirestore(firebase);
+    console.log("Estamos en device");
 }else{
     db = initializeFirestore(firebase,{
         experimentalForceLongPolling: true
     })    
 }*/
+
 const db = initializeFirestore(firebase,{
     experimentalForceLongPolling: true
 })

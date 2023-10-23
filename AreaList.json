@@ -3,163 +3,190 @@
     {
         "courseCode": 14,
         "title": "Aritmética",
-        "image": "https://cdn-icons-png.flaticon.com/512/4718/4718999.png"
-        
+        "image": "https://cdn-icons-png.flaticon.com/512/4718/4718999.png",
+        "enabled": false        
     },
    
     {
         "courseCode": 16,
         "title": "Geometría",
-        "image": "https://cdn-icons-png.flaticon.com/128/3206/3206158.png"
-        
+        "image": "https://cdn-icons-png.flaticon.com/128/3206/3206158.png",
+        "enabled": false
     },
     
     {
         "courseCode": 12,
         "title": "Geo. Anal.",
-        "image": "https://cdn-icons-png.flaticon.com/128/3206/3206158.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/3206/3206158.png",
+        "enabled": false
     
     },
     {
         "courseCode": 11,
         "title": "Trigonometría",
-        "image": "https://cdn-icons-png.flaticon.com/128/9978/9978999.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/9978/9978999.png",
+        "enabled": false
         
     },
     {
         "courseCode": 10,
         "title": "Raz. Mate. 1",
-        "image": "https://cdn-icons-png.flaticon.com/128/9041/9041926.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/9041/9041926.png",
+        "enabled": true
         
     },
     {
         "courseCode": 17,
         "title": "Psicotécnico",
-        "image": "https://cdn-icons-png.flaticon.com/128/6938/6938770.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/6938/6938770.png",
+        "enabled": false
         
     },
     {
         "courseCode": 13,
         "title": "Algebra",
-        "image": "https://cdn-icons-png.flaticon.com/128/2861/2861731.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/2861/2861731.png",
+        "enabled": false
         
     },
     
     {
         "courseCode": 15,
         "title": "Raz. Mate. 2",
-        "image": "https://cdn-icons-png.flaticon.com/128/9041/9041926.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/9041/9041926.png",
+        "enabled": false
         
     },
 
     {
         "courseCode": 200,
         "title": "Física 1",
-        "image": "https://cdn-icons-png.flaticon.com/128/3247/3247965.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/3247/3247965.png",
+        "enabled": true
         
     },
 
     {
         "courseCode": 203,
         "title": "Química 1",
-        "image": "https://cdn-icons-png.flaticon.com/128/6691/6691388.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/6691/6691388.png",
+        "enabled": true
         
     },
     {
         "courseCode": 101,
         "title": "Biologia 1",
-        "image": "https://cdn-icons-png.flaticon.com/128/1651/1651643.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/1651/1651643.png",
+        "enabled": true
     },   
       
     {
         "courseCode": 102 ,
         "title": "Biologia 2",
-        "image": "https://cdn-icons-png.flaticon.com/128/1186/1186523.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/1186/1186523.png",
+        "enabled": false
     },
     {
         "courseCode": 100,
         "title": "Anatomía",
-        "image": "https://cdn-icons-png.flaticon.com/128/4178/4178727.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/4178/4178727.png",
+        "enabled": false
     },
     {
         "courseCode": 103,
         "title": "Cívica",
-        "image": "https://cdn-icons-png.flaticon.com/128/6203/6203283.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/6203/6203283.png",
+        "enabled": false
     },
     {
         "courseCode": 104,
         "title": "Economía",
-        "image": "https://cdn-icons-png.flaticon.com/128/3310/3310624.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/3310/3310624.png",
+        "enabled": true
     },
     {
         "courseCode": 105,
         "title": "Filosofía",
-        "image": "https://cdn-icons-png.flaticon.com/128/6981/6981198.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/6981/6981198.png",
+        "enabled": false
     },
     {
         "courseCode": 201,
         "title": "Física 2",
-        "image": "https://cdn-icons-png.flaticon.com/128/2133/2133073.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/2133/2133073.png",
+        "enabled": false
     },
     {
         "courseCode": 202,
         "title": "Física 3",
-        "image": "https://cdn-icons-png.flaticon.com/128/887/887862.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/887/887862.png",
+        "enabled": false
     },
     {
         "courseCode": 106,
         "title": "Geografía",
-        "image": "https://cdn-icons-png.flaticon.com/128/921/921495.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/921/921495.png",
+        "enabled": false
     },
     {
         "courseCode": 107,
         "title": "Historia 1",
-        "image": "https://cdn-icons-png.flaticon.com/128/5660/5660272.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/5660/5660272.png",
+        "enabled": false
     },
     {
         "courseCode": 108,
         "title": "Historia 2",
-        "image": "https://cdn-icons-png.flaticon.com/128/1081/1081031.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/1081/1081031.png",
+        "enabled": false
     },
     {
         "courseCode": 109,
         "title": "Lenguaje 1",
-        "image": "https://cdn-icons-png.flaticon.com/128/8123/8123334.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/8123/8123334.png",
+        "enabled": false
     },
     {
         "courseCode": 110,
         "title": "Lenguaje 2",
-        "image": "https://cdn-icons-png.flaticon.com/128/8123/8123334.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/8123/8123334.png",
+        "enabled": false
     },
     {
         "courseCode": 111,
         "title": "Literatura",
-        "image": "https://cdn-icons-png.flaticon.com/128/4072/4072217.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/4072/4072217.png",
+        "enabled": false
     },
     {
         "courseCode": 112,
         "title": "Psicología",
-        "image": "https://cdn-icons-png.flaticon.com/128/4305/4305261.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/4305/4305261.png",
+        "enabled": false
     },
     {
         "courseCode": 204,
         "title": "Química 2",
-        "image": "https://cdn-icons-png.flaticon.com/128/962/962737.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/962/962737.png",
+        "enabled": false
     },
     {
         "courseCode": 205,
         "title": "Química 3",
-        "image": "https://cdn-icons-png.flaticon.com/128/710/710481.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/710/710481.png",
+        "enabled": false
     },
     {
         "courseCode": 113,
         "title": "Raz. Verbal 1",
-        "image": "https://cdn-icons-png.flaticon.com/128/710/710481.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/710/710481.png",
+        "enabled": false
     },
     {
         "courseCode": 114,
         "title": "Raz. Verbal 2",
-        "image": "https://cdn-icons-png.flaticon.com/128/4944/4944492.png"
+        "image": "https://cdn-icons-png.flaticon.com/128/4944/4944492.png",
+        "enabled": false
     }
           
 ]

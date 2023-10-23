@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from "react";
-import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
+import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, ActivityIndicator, Alert, ScrollView } from "react-native";
 import MyButton from "./MyButtonComponent";
 import LogoComponent from "./LogoComponent";
 import Alternatives from "./AlternativesComponent";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import BannerAdGoogle from "./BannerAdGoogle";
 import { where, getDocs,updateDoc, getDoc, getFirestore, collection, doc, query, onSnapshot, initializeFirestore } from "firebase/firestore";
 import tw from "twrnc";
 import { db } from "../../database/firebase";
@@ -64,17 +65,23 @@ const Question = ()=> {
 
     const get_dimensions = ()=> {
         const imageUrl = data[questionNumber].question;
-        Image.getSize(imageUrl, (width, height) => {
-            // Aquí puedes utilizar las dimensiones (width y height) de la imagen
-            // para establecer el estilo de tu componente Image o realizar otras acciones.
-            console.log(`Ancho: ${width}, Alto: ${height}`);
-            setWidth(width);
-            setHeight(height);
-            setFinish(true);
-          }, error => {
-            // Manejo de errores en caso de que no se pueda obtener el tamaño de la imagen.
-            console.error(`Error al obtener el tamaño de la imagen: ${error}`);
-          });
+        if(imageUrl){
+            Image.getSize(imageUrl, (width, height) => {
+                // Aquí puedes utilizar las dimensiones (width y height) de la imagen
+                // para establecer el estilo de tu componente Image o realizar otras acciones.
+                //console.log(`Ancho: ${width}, Alto: ${height}`);
+                console.log("id:",data[questionNumber].id);
+                setWidth(width);
+                setHeight(height);
+                setFinish(true);
+              }, error => {
+                // Manejo de errores en caso de que no se pueda obtener el tamaño de la imagen.
+                console.error(`Error al obtener el tamaño de la imagen: ${error}`);
+              });
+        }else{
+            handleQuestion();
+        }
+        
     };
     useEffect(()=> {
         if(data.length > 0){
@@ -159,7 +166,9 @@ const Question = ()=> {
     
     if(data.length > 0){
         return (
-            <View style = {tw `items-center`}>
+            
+            <ScrollView>
+            <View style = {tw `items-center p-5`}>
                 
                 <View style = {tw`p-2 items-start`}>
                     <LogoComponent/>
@@ -185,6 +194,8 @@ const Question = ()=> {
                 <Image style={{ width: 80, height: 80, resizeMode: "contain"}}
                     source={{uri: "https://cdn-icons-png.flaticon.com/128/4138/4138783.png"}}/>
             </View>
+            </ScrollView>
+            
         );
     }else{
         if(loadingData){

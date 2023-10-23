@@ -170,7 +170,7 @@ const SolutionScreen = (props) => {
           {!loading && <Text style = {tw`text-black text-opacity-50`}>A {numberLikes} personas les gustó esto</Text>}  
           {/*!loading && <Text style = {tw`text-black text-opacity-50`}>{numberDislikes} dislikes</Text>*/}         
         </View>        
-        {!vote &&  existSolution && <View style={tw`flex-row p-1 justify-between w-60`}>
+        {/*!vote &&  existSolution && <View style={tw`flex-row p-1 justify-between w-60`}>
           
             <Surface style={tw` rounded rounded-full`} elevation={4}>
             <Icon reverse
@@ -204,7 +204,7 @@ const SolutionScreen = (props) => {
             
     
            
-          </View>}
+              </View>*/}
         </View> 
       
       
