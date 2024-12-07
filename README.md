@@ -104,7 +104,8 @@ A todos los estudiantes, profesores y colaboradores que inspiraron este proyecto
 ### 📧 Contacto
 
 Si tienes alguna pregunta o sugerencia, no dudes en contactarme:
-- **Email**: [tu-email@example.com](mailto:tu-email@example.com)
-- **GitHub**: [https://github.com/usuario](https://github.com/usuario)
+- ✉️ **Email**: [emamanix@gmail.com](mailto:emamanix@egmail.com)
+- 💻**GitHub**: [https://github.com/AlessS4ndro](https://github.com/AlessS4ndro69)
+- 📞**Whatsapp**: [Envíame un mensaje](https://wa.me/51925968311)
 
 ---
