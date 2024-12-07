@@ -13,7 +13,8 @@ Bienvenidos al **Repositorio de Ejercicios Resueltos de Matemática**, una aplic
 
 ## 🖼️ Capturas de Pantalla
 
-> *(Incluye capturas de pantalla aquí para mostrar la interfaz de usuario)*
+> ![Interfaz de usuario](assets/Screenshot_20230804-153114_soykachimbo.jpg "Vista de la interfaz")
+
 
 ---
 
