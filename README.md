@@ -37,12 +37,12 @@ Sigue estos pasos para ejecutar el proyecto localmente:
 
 1. **Clona este repositorio**:
    ```bash
-   git clone https://github.com/usuario/repositorio-matematica.git
+   git clone https://github.com/AlessS4ndro69/Soykachimbo.git
    ```
 
 2. **Navega al directorio del proyecto**:
    ```bash
-   cd repositorio-matematica
+   cd Soykachimbo
    ```
 
 3. **Instala las dependencias**:
@@ -54,13 +54,6 @@ Sigue estos pasos para ejecutar el proyecto localmente:
    ```bash
    expo start
    ```
-
-5. **Configura Firebase**:
-   - Crea un proyecto en Firebase.
-   - Copia el archivo `firebaseConfig.js` a tu proyecto.
-   - Añade tu configuración de Firebase en el archivo.
-
----
 
 ## 🌐 Demo
 
