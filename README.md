@@ -14,9 +14,10 @@ Bienvenidos al **Repositorio de Ejercicios Resueltos de Matemática**, una aplic
 ## 🖼️ Capturas de Pantalla
 
 <p align="center">
-  <img src="assets/Screenshot_20230804-153114_soykachimbo.jpg" alt="Imagen 1" width="200"/>
-  <img src="ruta/imagen2.png" alt="Imagen 2" width="200"/>
-  <img src="ruta/imagen3.png" alt="Imagen 3" width="200"/>
+  <img src="assets/Screenshot_20230804-153114_soykachimbo.jpg" alt="screenhome" width="200"/>
+  <img src="assets/Screenshot_20230804-153107_soykachimbo.jpg" alt="screencourses" width="200"/>
+  <img src="assets/Screenshot_20230804-153010_soykachimbo.jpg" alt="screenform" width="200"/>
+  <img src="assets/Screenshot_1698338364.jpg" alt="screensolution" width="200"/>
 </p>
 
 
