@@ -13,7 +13,11 @@ Bienvenidos al **Repositorio de Ejercicios Resueltos de Matemática**, una aplic
 
 ## 🖼️ Capturas de Pantalla
 
-> ![Interfaz de usuario](assets/Screenshot_20230804-153114_soykachimbo.jpg "Vista de la interfaz")
+<p align="center">
+  <img src="assets/Screenshot_20230804-153114_soykachimbo.jpg" alt="Imagen 1" width="200"/>
+  <img src="ruta/imagen2.png" alt="Imagen 2" width="200"/>
+  <img src="ruta/imagen3.png" alt="Imagen 3" width="200"/>
+</p>
 
 
 ---
