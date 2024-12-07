@@ -17,7 +17,7 @@ Bienvenidos al **Repositorio de Ejercicios Resueltos de Matemática**, una aplic
   <img src="assets/Screenshot_20230804-153114_soykachimbo.jpg" alt="screenhome" width="200"/>
   <img src="assets/Screenshot_20230804-153107_soykachimbo.jpg" alt="screencourses" width="200"/>
   <img src="assets/Screenshot_20230804-153010_soykachimbo.jpg" alt="screenform" width="200"/>
-  <img src="assets/Screenshot_1698338364.jpg" alt="screensolution" width="200"/>
+  <img src="assets/Screenshot_1698338364.png" alt="screensolution" width="200"/>
 </p>
 
 
