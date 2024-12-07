@@ -64,7 +64,7 @@ Sigue estos pasos para ejecutar el proyecto localmente:
 
 ## 🌐 Demo
 
-> *(Incluir enlace al demo en caso de estar disponible)*
+> https://apkpure.com/p/com.aless4ndro.soykachimbo
 
 ---
 
